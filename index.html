@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>悯月 · 极致高清分组系统 v3.0</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="orientation-gate">
+        <div class="gate-icon">🔄</div>
+        <p class="gate-msg">请旋转手机，进入“悯月”横屏视界</p>
+    </div>
+
+    <div class="app-main hidden">
+        <div class="col-input">
+            <h1 class="glow-title">悯月</h1>
+            <p class="sys-tag">MIN YUE SYSTEM V3</p>
+            
+            <div class="input-panel">
+                <textarea id="playerInput" placeholder="在此粘贴群名单...&#10;(系统会自动清洗干扰字符)"></textarea>
+            </div>
+
+            <button id="groupBtn" class="action-btn">生成随机对阵 (5V5)</button>
+        </div>
+        
+        <div class="col-result">
+            <div id="resultOutput" class="result-area">
+                <p class="placeholder-text">等待对阵生成...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="parser.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

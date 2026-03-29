@@ -1,0 +1,108 @@
+:root {
+    --cyan: #00e5ff;
+    --team-blue: #00e5ff;
+    --team-red: #ff4081;
+    --text-glass: rgba(255, 255, 255, 0.9);
+    --bg-dark: #050a14;
+    --plate-bg: rgba(13, 27, 48, 0.08); /* 极致透明，不遮挡立绘 */
+    --border-plate: rgba(0, 229, 255, 0.15);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body, html {
+    margin: 0; padding: 0; width: 100vw; height: 100vh;
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background-color: var(--bg-dark);
+    overflow: hidden; /* 核心：防止手机界面滚动 */
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+}
+
+/* 高清横屏背景适配 */
+body {
+    background-image: url('bg.jpg'); /* 请确保文件名准确为 bg.jpg */
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* --- 强制横屏引导层 --- */
+#orientation-gate {
+    display: none; position: fixed; top: 0; left: 0; 
+    width: 100%; height: 100%; z-index: 10000;
+    background: rgba(5, 10, 20, 0.96);
+    flex-direction: column; align-items: center; justify-content: center;
+}
+#orientation-gate .gate-icon { font-size: 50px; margin-bottom: 25px; color: #fff; }
+#orientation-gate .gate-msg { color: var(--cyan); font-size: 1.3rem; letter-spacing: 2px; }
+
+/* 极致清透容器 */
+.app-main {
+    width: 94%; height: 88%;
+    display: flex; flex-direction: row; /* 强制横排布局 */
+    background: var(--plate-bg);
+    padding: 25px; border-radius: 20px;
+    border: 1px solid var(--border-plate);
+    box-shadow: 0 0 40px rgba(0,0,0,0.8);
+    transition: transform 0.3s ease-out, opacity 0.3s;
+    
+    /* 核心操作：铲除所有的 blur 模糊特效！！！ */
+    /* backdrop-filter: none;  */ /* 确保没有任何背景模糊干扰立绘 */
+}
+
+.hidden { opacity: 0; transform: scale(0.95); pointer-events: none; }
+
+/* 左侧输入列 */
+.col-input {
+    flex: 1.3; display: flex; flex-direction: column;
+    padding-right: 25px; border-right: 1px dashed rgba(255,255,255,0.08);
+}
+
+.glow-title {
+    font-size: 4.2rem; text-align: left; margin: 0 0 5px 0;
+    color: #fff; text-shadow: 0 0 15px var(--cyan), 0 0 30px var(--cyan);
+    font-weight: 900; letter-spacing: 15px; /* 增加高级感 */
+}
+
+.sys-tag {
+    text-align: left; font-size: 0.7rem; color: var(--cyan);
+    opacity: 0.8; letter-spacing: 3px; margin: 0 0 15px 0;
+}
+
+.input-panel { flex: 1; margin-bottom: 12px; }
+textarea {
+    width: 100%; height: 100%;
+    background: rgba(255, 255, 255, 0.03); /* 完全透亮 */
+    color: #fff; font-size: 1.15rem; line-height: 1.6;
+    border: 1px solid var(--border-plate);
+    border-radius: 12px; padding: 15px;
+    outline: none; resize: none;
+}
+
+.action-btn {
+    height: 58px;
+    background: linear-gradient(135deg, #0091ea, #00b0ff);
+    color: #fff; border: none; border-radius: 10px;
+    font-weight: bold; font-size: 1.3rem; cursor: pointer;
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.4);
+}
+
+/* 右侧对阵列 */
+.col-result { flex: 1; padding-left: 25px; display: flex; flex-direction: column; justify-content: center; }
+.result-area { background: rgba(0, 0, 0, 0.45); border-radius: 15px; padding: 20px; min-height: 250px; font-size: 1.25rem; }
+.placeholder-text { color: rgba(255,255,255,0.25); text-align: center; }
+
+/* 针对结果卡片的优化 */
+.result-card { display: flex; flex-direction: column; gap: 15px; }
+.team-item { margin-bottom: 5px; }
+.team-item .label { font-weight: bold; font-size: 1.1rem; }
+.team-item.blue .label { color: var(--team-blue); }
+.team-item.red .label { color: var(--team-red); }
+.team-item p { margin: 8px 0; color: rgba(255,255,255,0.9); }
+
+/* 只在竖屏下强制显示提示，横屏时隐藏提示并显示主界面 */
+@media screen and (orientation: portrait) {
+    #orientation-gate { display: flex; }
+    .app-main { display: none; }
+}
